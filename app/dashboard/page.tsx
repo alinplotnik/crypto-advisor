@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import CoinPrices from '@/components/CoinPrices'
+import MarketNews from '@/components/MarketNews'
 
 // This is the main dashboard page that users see after logging in and completing onboarding. It checks for user authentication and preferences, and displays personalized content based on the user's selected interests and investor type.
 export default async function DashboardPage() {
@@ -37,7 +38,7 @@ export default async function DashboardPage() {
 
       <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
         <CoinPrices assets={prefs.assets} />
-        {/* TODO: MarketNews section */}
+        <MarketNews assets={prefs.assets} />
         {/* TODO: AiInsight section */}
         {/* TODO: CryptoMeme section */}
       </div>
