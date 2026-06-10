@@ -17,17 +17,17 @@ export default function DashboardError({
   }, [error])
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-950 p-4">
-      <section className="max-w-md rounded-2xl bg-gray-900 p-6 text-center">
-        <h2 className="mb-2 text-lg font-semibold text-white">
+    <main className="flex min-h-screen items-center justify-center bg-background p-4">
+      <section className="max-w-md rounded-xl border border-border bg-card p-6 text-center shadow-sm">
+        <h2 className="mb-2 text-lg font-medium text-card-foreground">
           Something went wrong
         </h2>
-        <p className="mb-4 text-gray-400">
+        <p className="mb-4 text-muted-foreground">
           We couldn&apos;t load your dashboard. Please try again.
         </p>
         <button
           onClick={() => unstable_retry()}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500"
+          className="rounded-md bg-primary px-4 py-2 text-primary-foreground transition hover:bg-primary/90"
         >
           Try again
         </button>

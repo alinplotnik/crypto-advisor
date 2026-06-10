@@ -25,8 +25,8 @@ export default function VoteButtons({ section, contentId }: Props) {
     <div className="flex gap-2">
       <button
         onClick={() => vote(1)}
-        className={`rounded-lg px-3 py-1 text-sm transition ${
-          voted === 1 ? 'bg-emerald-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+        className={`rounded-md px-3 py-1 text-sm transition ${
+          voted === 1 ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'
         }`}
         aria-label="Thumbs up"
       >
@@ -34,8 +34,8 @@ export default function VoteButtons({ section, contentId }: Props) {
       </button>
       <button
         onClick={() => vote(-1)}
-        className={`rounded-lg px-3 py-1 text-sm transition ${
-          voted === -1 ? 'bg-red-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+        className={`rounded-md px-3 py-1 text-sm transition ${
+          voted === -1 ? 'bg-destructive text-destructive-foreground' : 'bg-secondary text-muted-foreground hover:bg-accent'
         }`}
         aria-label="Thumbs down"
       >

@@ -33,11 +33,11 @@ export default function NewsList({ items }: { items: NewsItem[] }) {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-gray-200 hover:text-emerald-400"
+                className="text-sm text-foreground underline-offset-4 hover:underline"
               >
                 {item.title}
               </a>
-              <p className="text-xs text-gray-500">{item.source}</p>
+              <p className="text-xs text-muted-foreground">{item.source}</p>
             </div>
             <VoteButtons section="news" contentId={item.id} />
           </li>
@@ -47,7 +47,7 @@ export default function NewsList({ items }: { items: NewsItem[] }) {
       {totalPages > 1 && (
         <button
           onClick={refresh}
-          className="mt-4 w-full rounded-lg bg-gray-800 py-2 text-sm text-gray-300 transition hover:bg-gray-700"
+          className="mt-4 w-full rounded-md bg-secondary py-2 text-sm text-secondary-foreground transition hover:bg-accent"
         >
           🔄 Show me other articles
         </button>

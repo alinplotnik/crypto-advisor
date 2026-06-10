@@ -68,13 +68,13 @@ export default async function MarketNews({ assets }: { assets: string[] }) {
   const { items, live } = await fetchNews(assets)
 
   return (
-    <section className="rounded-2xl bg-gray-900 p-6">
+    <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">
+        <h2 className="text-lg font-medium text-card-foreground">
           📰 Market News
           {!live && (
-            <span className="ml-2 rounded bg-gray-800 px-2 py-0.5 text-xs text-gray-400">
-            live news unavailable           
+            <span className="ml-2 rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+            live news unavailable
             </span>
           )}
         </h2>
@@ -85,7 +85,7 @@ export default async function MarketNews({ assets }: { assets: string[] }) {
             href="https://cointelegraph.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 block w-full rounded-lg bg-gray-800 py-2 text-center text-sm text-emerald-400 transition hover:bg-gray-700"
+            className="mt-4 block w-full rounded-md bg-secondary py-2 text-center text-sm text-secondary-foreground transition hover:bg-accent"
             >
             Browse the latest news on Cointelegraph →
         </a>

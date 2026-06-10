@@ -5,14 +5,14 @@ export default async function CoinPrices({ assets }: { assets: string[] }) {
   const prices = await fetchPrices(assets)
 
   return (
-    <section className="rounded-2xl bg-gray-900 p-6">
+    <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">💰 Coin Prices</h2>
+        <h2 className="text-lg font-medium text-card-foreground">💰 Coin Prices</h2>
         <VoteButtons section="prices" contentId={`prices-${new Date().toISOString().slice(0, 10)}`} />
       </div>
 
       {!prices ? (
-        <p className="text-gray-400">Couldn&apos;t load prices right now. Try again soon.</p>
+        <p className="text-muted-foreground">Couldn&apos;t load prices right now. Try again soon.</p>
       ) : (
         <ul className="space-y-3">
           {assets.map((asset) => {
@@ -21,12 +21,12 @@ export default async function CoinPrices({ assets }: { assets: string[] }) {
             const change = data.usd_24h_change
             return (
               <li key={asset} className="flex items-center justify-between">
-                <span className="text-gray-200">{asset}</span>
+                <span className="text-foreground">{asset}</span>
                 <span className="flex items-center gap-3">
-                  <span className="font-mono text-white">
+                  <span className="font-mono text-foreground">
                     ${data.usd.toLocaleString()}
                   </span>
-                  <span className={change >= 0 ? 'text-emerald-400' : 'text-red-400'}>
+                  <span className={change >= 0 ? 'text-primary' : 'text-destructive'}>
                     {change >= 0 ? '▲' : '▼'} {Math.abs(change).toFixed(2)}%
                   </span>
                 </span>

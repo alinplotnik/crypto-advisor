@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Brand from '@/components/Brand'
 
 // This is the onboarding page where new users can select their crypto interests, investor type, and preferred content. The selections are saved to the database and used to personalize the user dashboard.
 const ASSETS = ['Bitcoin', 'Ethereum', 'Solana', 'Cardano', 'Dogecoin', 'XRP']
@@ -44,13 +45,16 @@ export default function OnboardingPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-950 p-4">
-      <div className="w-full max-w-lg space-y-8 rounded-2xl bg-gray-900 p-8 shadow-xl">
-        <div>
-          <h1 className="text-2xl font-bold text-white">Let&apos;s get to know you</h1>
-          <p className="mt-1 text-sm text-gray-400">
-            Your answers shape your daily dashboard
-          </p>
+    <main className="flex min-h-screen items-center justify-center bg-background p-4">
+      <div className="w-full max-w-lg space-y-8 rounded-xl border border-border bg-card p-8 shadow-sm">
+        <div className="space-y-6">
+          <Brand />
+          <div>
+            <h1 className="text-2xl font-bold text-foreground">Let&apos;s get to know you</h1>
+            <p className="mt-1 font-mono text-sm text-muted-foreground">
+              Your answers shape your daily dashboard
+            </p>
+          </div>
         </div>
 
         <Question title="Which crypto assets interest you?">
@@ -86,12 +90,12 @@ export default function OnboardingPage() {
           ))}
         </Question>
 
-        {error && <p className="text-sm text-red-400">{error}</p>}
+        {error && <p className="text-sm text-destructive">{error}</p>}
 
         <button
           onClick={handleSubmit}
           disabled={!isValid || saving}
-          className="w-full rounded-lg bg-emerald-600 p-3 font-semibold text-white hover:bg-emerald-500 disabled:opacity-40"
+          className="w-full rounded-md bg-primary p-3 font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-40"
         >
           {saving ? 'Saving...' : 'Build my dashboard'}
         </button>
@@ -104,7 +108,7 @@ export default function OnboardingPage() {
 function Question({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="mb-3 font-semibold text-white">{title}</h2>
+      <h2 className="mb-3 font-medium text-foreground">{title}</h2>
       <div className="flex flex-wrap gap-2">{children}</div>
     </div>
   )
@@ -123,10 +127,10 @@ function Chip({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full px-4 py-2 text-sm transition ${
+      className={`rounded-full border px-4 py-2 text-sm transition ${
         selected
-          ? 'bg-emerald-600 text-white'
-          : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+          ? 'border-primary bg-primary text-primary-foreground'
+          : 'border-border bg-secondary text-secondary-foreground hover:bg-accent'
       }`}
     >
       {label}

@@ -67,14 +67,14 @@ export default async function CryptoMeme() {
   const meme = await fetchMeme()
 
   return (
-    <section className="rounded-2xl bg-gray-900 p-6">
+    <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">😂 Fun Crypto Meme</h2>
+        <h2 className="text-lg font-medium text-card-foreground">😂 Fun Crypto Meme</h2>
         {/* Vote on the specific meme, so feedback maps to exact content */}
         <VoteButtons section="meme" contentId={meme.postLink ?? meme.url} />
       </div>
 
-      <p className="mb-3 text-gray-200">{meme.title}</p>
+      <p className="mb-3 text-foreground">{meme.title}</p>
       {/* Plain <img>: meme dimensions are unknown ahead of time and the domain
           varies, so next/image's required sizing/remotePatterns don't fit here */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -82,14 +82,14 @@ export default async function CryptoMeme() {
         src={meme.url}
         alt={meme.title}
         loading="lazy"
-        className="max-h-96 w-full rounded-lg object-contain"
+        className="max-h-96 w-full rounded-lg border border-border bg-muted object-contain"
       />
       {meme.postLink && (
         <a
           href={meme.postLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-block text-xs text-gray-500 hover:text-gray-300"
+          className="mt-3 inline-block text-xs text-muted-foreground hover:text-foreground"
         >
           View on Reddit ↗
         </a>

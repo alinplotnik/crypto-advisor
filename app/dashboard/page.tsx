@@ -5,6 +5,7 @@ import MarketNews from '@/components/MarketNews'
 import AiInsight from '@/components/AiInsight'
 import CryptoMeme from '@/components/CryptoMeme'
 import LogoutButton from '@/components/LogoutButton'
+import Brand from '@/components/Brand'
 import { Suspense } from 'react'
 
 
@@ -31,17 +32,18 @@ export default async function DashboardPage() {
     .single()
 
   return (
-    <main className="min-h-screen bg-gray-950 p-4 md:p-8">
-      <header className="mx-auto mb-8 flex max-w-5xl items-start justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-white">
-            Hey {profile?.name || 'there'} 👋
-          </h1>
-          <p className="text-gray-400">
-            Your daily crypto briefing, tailored for a {prefs.investor_type}
-          </p>
+    <main className="min-h-screen bg-background p-4 md:p-8">
+      <header className="mx-auto mb-8 max-w-5xl">
+        <div className="mb-6 flex items-start justify-between">
+          <Brand />
+          <LogoutButton />
         </div>
-        <LogoutButton />
+        <h1 className="text-3xl font-bold text-foreground">
+          Hey {profile?.name || 'there'} 👋
+        </h1>
+        <p className="mt-1 font-mono text-sm text-muted-foreground">
+          Your daily crypto briefing, tailored for a {prefs.investor_type}
+        </p>
       </header>
 
         <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
@@ -73,13 +75,13 @@ export default async function DashboardPage() {
 // Optional message tells the user what's happening (e.g. AI generation takes a few seconds).
 function SectionSkeleton({ title, message }: { title: string; message?: string }) {
   return (
-    <section className="rounded-2xl bg-gray-900 p-6">
-      <h2 className="mb-4 text-lg font-semibold text-white">{title}</h2>
-      {message && <p className="mb-3 text-sm text-gray-400">{message}</p>}
+    <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
+      <h2 className="mb-4 text-lg font-medium text-card-foreground">{title}</h2>
+      {message && <p className="mb-3 text-sm text-muted-foreground">{message}</p>}
       <div className="space-y-3">
-        <div className="h-4 animate-pulse rounded bg-gray-800" />
-        <div className="h-4 animate-pulse rounded bg-gray-800" />
-        <div className="h-4 w-2/3 animate-pulse rounded bg-gray-800" />
+        <div className="h-4 animate-pulse rounded bg-muted" />
+        <div className="h-4 animate-pulse rounded bg-muted" />
+        <div className="h-4 w-2/3 animate-pulse rounded bg-muted" />
       </div>
     </section>
   )
