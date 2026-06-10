@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import CoinPrices from '@/components/CoinPrices'
 import MarketNews from '@/components/MarketNews'
 import AiInsight from '@/components/AiInsight'
+import CryptoMeme from '@/components/CryptoMeme'
 import { Suspense } from 'react'
 
 
@@ -56,7 +57,9 @@ export default async function DashboardPage() {
             >
                 <AiInsight userId={user.id} investorType={prefs.investor_type} assets={prefs.assets} />
             </Suspense>
-            {/* TODO: CryptoMeme section */}
+            <Suspense fallback={<SectionSkeleton title="😂 Fun Crypto Meme" />}>
+                <CryptoMeme />
+            </Suspense>
         </div>
     </main>
   )
