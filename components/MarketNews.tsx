@@ -51,7 +51,9 @@ async function fetchNews(assets: string[]): Promise<{ items: NewsItem[]; live: b
     // Items mentioning the user's assets come first; general news fills the rest
     const keywords = assets.flatMap((a) => ASSET_KEYWORDS[a] ?? [])
     const matching = allItems.filter((item) =>
-      keywords.some((kw) => item.title.toLowerCase().includes(kw))
+    keywords.some((kw) =>
+        new RegExp(`\\b${kw}\\b`, 'i').test(item.title)
+     )
     )
     const general = allItems.filter((item) => !matching.includes(item))
     const items = [...matching, ...general].slice(0, 20)
