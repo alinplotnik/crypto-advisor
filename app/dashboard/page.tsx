@@ -4,6 +4,7 @@ import CoinPrices from '@/components/CoinPrices'
 import MarketNews from '@/components/MarketNews'
 import AiInsight from '@/components/AiInsight'
 import CryptoMeme from '@/components/CryptoMeme'
+import LogoutButton from '@/components/LogoutButton'
 import { Suspense } from 'react'
 
 
@@ -31,13 +32,16 @@ export default async function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-gray-950 p-4 md:p-8">
-      <header className="mx-auto mb-8 max-w-5xl">
-        <h1 className="text-3xl font-bold text-white">
-          Hey {profile?.name || 'there'} 👋
-        </h1>
-        <p className="text-gray-400">
-          Your daily crypto briefing, tailored for a {prefs.investor_type}
-        </p>
+      <header className="mx-auto mb-8 flex max-w-5xl items-start justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-white">
+            Hey {profile?.name || 'there'} 👋
+          </h1>
+          <p className="text-gray-400">
+            Your daily crypto briefing, tailored for a {prefs.investor_type}
+          </p>
+        </div>
+        <LogoutButton />
       </header>
 
         <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">

@@ -1,8 +1,8 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-// This middleware runs on every request to the app. It checks if the user is authenticated and redirects them to the appropriate page based on their authentication status.
-export async function middleware(request: NextRequest) {
+// This proxy (called middleware before Next.js 16) runs on every request to the app. It checks if the user is authenticated and redirects them to the appropriate page based on their authentication status.
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request })
 
   const supabase = createServerClient(
