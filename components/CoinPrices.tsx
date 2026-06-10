@@ -1,30 +1,8 @@
 import VoteButtons from './VoteButtons'
-
-// Map onboarding asset names to CoinGecko coin ids
-const COINGECKO_IDS: Record<string, string> = {
-  Bitcoin: 'bitcoin',
-  Ethereum: 'ethereum',
-  Solana: 'solana',
-  Cardano: 'cardano',
-  Dogecoin: 'dogecoin',
-  XRP: 'ripple',
-}
-
-type PriceData = Record<string, { usd: number; usd_24h_change: number }>
+import { COINGECKO_IDS, fetchPrices } from '@/lib/coingecko'
 
 export default async function CoinPrices({ assets }: { assets: string[] }) {
-  const ids = assets.map((a) => COINGECKO_IDS[a]).filter(Boolean)
-
-  let prices: PriceData | null = null
-  try {
-    const res = await fetch(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${ids.join(',')}&vs_currencies=usd&include_24hr_change=true`,
-      { next: { revalidate: 60 } } // cache for 60s to respect rate limits
-    )
-    if (res.ok) prices = await res.json()
-  } catch {
-    // Network error -> fall through to the error state below
-  }
+  const prices = await fetchPrices(assets)
 
   return (
     <section className="rounded-2xl bg-gray-900 p-6">
