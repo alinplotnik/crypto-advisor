@@ -2,7 +2,7 @@
 
 A personalized crypto dashboard that gets to know the user through a short onboarding quiz, then serves daily AI-curated content tailored to their interests — with thumbs up/down feedback on every section, stored for future model improvements.
 
-**Live app:** _<deployed URL here>_
+**Live app:** https://crypto-advisor-zeta.vercel.app
 **Repository:** https://github.com/alinplotnik/crypto-advisor
 **Database access:** Supabase (PostgreSQL) — credentials shared separately on request.
 
@@ -62,6 +62,32 @@ Required environment variables:
 | `SUPABASE_SERVICE_ROLE_KEY` | Only used by local verification scripts — not needed by the app |
 
 Database schema lives in versioned migrations under `supabase/migrations/` (profiles, preferences, feedback, insights, the signup trigger, and the RLS policies). Apply with `supabase db push`.
+
+## Project structure
+
+```
+app/
+  login/  signup/          auth pages (Supabase email/password)
+  onboarding/              preference quiz (assets, investor type, content)
+  dashboard/               the daily dashboard + error boundary
+  api/preferences/         saves onboarding answers (upsert)
+  api/feedback/            saves thumbs up/down votes (upsert)
+components/
+  CoinPrices.tsx           CoinGecko prices + 24h change
+  MarketNews.tsx           RSS news, user's assets prioritized, static fallback
+  AiInsight.tsx            Gemini daily insight, cached per user/day in DB
+  CryptoMeme.tsx           fresh Reddit meme per load, bundled fallback
+  VoteButtons.tsx          optimistic 👍/👎 voting on every section
+  Brand.tsx                CryptoPulse logo + wordmark
+lib/
+  supabase/                browser + server Supabase clients
+  coingecko.ts             shared asset→coin-id map and price fetch
+  fallback-news.ts         curated evergreen news per asset
+supabase/migrations/       schema, signup trigger, RLS policies
+proxy.ts                   auth guard on every route (Next 16 proxy)
+```
+
+The dashboard page (`app/dashboard/page.tsx`) authenticates, loads preferences, and streams the four sections independently — each in its own `<Suspense>` boundary with a skeleton, so the page is interactive immediately and no single API can block or break it.
 
 ## Bonus — how feedback enables future model improvements
 
